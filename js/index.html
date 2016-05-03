@@ -1,5 +1,13 @@
 <h2>Welcome to Posts index!</h2>
 
+<button data-ng-hide="newPost" data-ng-click="newPost = !newPost">New post</button>
+<form data-ng-show="newPost" data-ng-submit="indexVm.create(); newPost = !newPost">
+  <input placeholder="Author" data-ng-model="indexVm.newpost.author" />
+  <input placeholder="Photo URL" data-ng-model="indexVm.newPost.photoUrl" />
+  <textarea placeholder="Post content" data-ng-model="indexVm.newPost.content" ></textarea>
+  <button type="submit">Add</button>
+</form>
+
 <div data-ng-repeat="post in indexVm.posts">
   <p><a data-ui-sref="postShow({id: post.id})">{{post.author}}</a></p>
 </div>

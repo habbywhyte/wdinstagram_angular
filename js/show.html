@@ -1,2 +1,11 @@
 <h1>Post Show</h1>
-<h2>{{showVm.post.author}}</h2>
+<h2>{{showVm.post}}</h2>
+
+<button data-ng-hide="editPost" data-ng-click="editPost = !editPost">Edit post</button>
+<form data-ng-show="editPost">
+  <label>Author</label>
+  <input type="text" name="newPost" data-ng-model="showVm.post">
+  <button class="update" data-ng-click="showVm.update(); editPost = !editPost">Save</button>
+  <button data-ng-click='editPost = !editPost' class='cancel'>Cancel</button>
+  <button class="delete" data-ui-sref="postIndex" data-ng-click="showVm.delete()">Delete</button>
+</form>

@@ -2,7 +2,7 @@
 
 (function(){
   angular
-  .module("wdinstagram", [
+  .module("app", [
     "ui.router"
   ])
   .config([
@@ -30,9 +30,9 @@
 
 
     var posts = [
-      {author: "Tyler"},
-      {author: "Andy"},
-      {author: "Adam"}
+      {author: "Vivie"},
+      {author: "Noe"},
+      {author: "Habby"}
     ]
 
     function PostIndexControllerFunc() {
@@ -50,7 +50,14 @@
       PostShowControllerFunc.$inject = [ "$stateParams" ];
         function PostShowControllerFunc($stateParams) {
         var showVm = this;
-        showVm.post = posts[ $stateParams.id];
-        };
+        showVm.post = posts[ $stateParams.id].author;
+
+        showVm.update = function() {
+            posts[$stateParams.id].author = showVm.post;
+          };
+        showVm.delete = function() {
+          posts.splice( $stateParams.id, 1);
+        }
+      };
 
     })();
