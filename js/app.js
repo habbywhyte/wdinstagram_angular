@@ -11,38 +11,46 @@
   ])
   .controller("PostIndexController", PostIndexControllerFunc)
   .controller("PostShowController", PostShowControllerFunc)
-  .factory("PostFactory", PostFactoryFunc);
 
-  var posts = [
-    {author: "Tyler"},
-    {author: "Andy"},
-    {author: "Adam"}
-  ]
+  function RouterFuction($stateProvider) {
+    $stateProvider
+      .state("postIndex", {
+        url: "/posts",
+        templateUrl: "js/index.html",
+        controller: "PostIndexController",
+        controllerAs: "indexVm"
+      })
+      .state("postShow", {
+          url: "/posts/:id",
+          templateUrl: "js/show.html",
+          controller: "PostShowController",
+          controllerAs: "showVm"
+      });
+    }
 
-  function PostIndexControllerFunc() {
-    var indexVm = this;
-    indexVm.posts = posts;
+
+    var posts = [
+      {author: "Tyler"},
+      {author: "Andy"},
+      {author: "Adam"}
+    ]
+
+    function PostIndexControllerFunc() {
+      var indexVm = this;
+      indexVm.posts = posts;
+      indexVm.newPost = "";
+
+
+    indexVm.create = function(){
+      posts.unshift({author: indexVm.newPost});
+      indexVm.newPost = "";
+    };
   }
 
+      PostShowControllerFunc.$inject = [ "$stateParams" ];
+        function PostShowControllerFunc($stateParams) {
+        var showVm = this;
+        showVm.post = posts[ $stateParams.id];
+        };
 
-function RouterFuction($stateProvider) {
-  $stateProvider
-    .state("postIndex", {
-      url: "/posts",
-      templateUrl: "js/index.html",
-      controller: "PostIndexController",
-      controllerAs: "indexVm"
-    })
-    .state("PostsShow", {
-        url: "/posts/:id",
-        templateUrl: "js/show.html",
-        controller: "PostShowController",
-        controllerAs: "showVm"
-    });
-  }
-
-
-}
-
-
-})();
+    })();
