@@ -1,0 +1,5 @@
+<h2>Welcome to Posts index!</h2>
+
+<div data-ng-repeat="post in indexVm.posts">
+  <p><a data-ui-sref="postShow({id: post.id})">{{post.author}}</a></p>
+</div>
